@@ -21,7 +21,8 @@ fs.mkdirSync(RESULT_DIR, { recursive: true });
 if (!fs.existsSync(DB_FILE)) fs.writeFileSync(DB_FILE, JSON.stringify({ users: [] }, null, 2));
 
 const app = express();
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+// app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "VITE_API_URL" }));
 app.use(express.json({ limit: "1mb" }));
 
 const PORT = Number(process.env.PORT || 4000);

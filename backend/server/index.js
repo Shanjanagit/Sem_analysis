@@ -37,7 +37,7 @@ const PROJECT_DIR = process.env.PROJECT_DIR
 const PYTHON = process.env.PYTHON_PATH || "python";
 
 const app = express();
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "CLIENT_ORIGIN" }));
 app.use(express.json({ limit: "1mb" }));
 
 const PORT = Number(process.env.PORT || 4000);
@@ -231,7 +231,7 @@ app.post("/api/auth/forgot-password", (req, res) => {
       JWT_SECRET,
       { expiresIn: RESET_TTL, issuer: "sem-analysis-portal", audience: "sem-analysis-reset" }
     );
-    const resetUrl = `${process.env.CLIENT_PUBLIC_URL || "http://localhost:5173"}/?resetToken=${encodeURIComponent(resetToken)}`;
+    const resetUrl = `${process.env.CLIENT_PUBLIC_URL || "CLIENT_ORIGIN"}/?resetToken=${encodeURIComponent(resetToken)}`;
     console.log(`Development password reset link for ${email}: ${resetUrl}`);
   }
   res.json({ message: "If that email is registered, reset instructions will be sent." });
